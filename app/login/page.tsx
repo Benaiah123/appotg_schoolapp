@@ -85,7 +85,7 @@ const SignIn = () => {
                 type="submit"
                 className="bg-secondary text-white rounded-lg py-3 mt-6 hover:bg-secondary/90 transition w-full"
               >
-                <Link href="/">Login</Link>z
+                <Link href="/">Login</Link>
               </button>
             </form>
           </div>

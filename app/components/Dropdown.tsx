@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { FaUserCircle, FaCog, FaSignOutAlt } from 'react-icons/fa';
-import { FiUser } from 'react-icons/fi';
+
 import Image from "next/image"
 
 const UserDropdown = () => {
@@ -31,7 +31,7 @@ const UserDropdown = () => {
         aria-label="User menu"
       >
         <Image className="md:hidden" src="/icons/Vector (9).png" alt='logo' width={14.38} height={8.13}/>
-        <Image className="md:hidden" src="/icons/ph_caret-down-bold.png" alt='logo' width={14.38} height={8.13}/>
+        <Image className="hidden md:block" src="/icons/ph_caret-down-bold.png" alt='logo' width={14.38} height={8.13}/>
       </button>
 
       {isOpen && (
