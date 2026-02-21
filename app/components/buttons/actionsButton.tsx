@@ -6,7 +6,7 @@ import { FaUserCircle, FaCog, FaSignOutAlt } from 'react-icons/fa';
 
 import Image from "next/image"
 
-const UserDropdown = () => {
+const ActionsButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -27,11 +27,13 @@ const UserDropdown = () => {
     <div className="relative inline-block text-left" ref={dropdownRef}>
       <button
         onClick={toggleDropdown}
-        className="flex items-center focus:outline-none"
+        className="flex items-center focus:outline-none cursor-pointer"
         aria-label="User menu"
       >
-        <Image className="md:hidden" src="/icons/Vector (9).png" alt='logo' width={14.38} height={8.13}/>
-        <Image className="hidden md:block cursor-pointer" src="/icons/ph_caret-down-bold.png" alt='logo' width={14.38} height={8.13}/>
+        <div className="flex gap-2 border border-black px-3 py-2 rounded-xl">
+                  <p>Actions</p>
+                  <Image src="/icons/ph_caret-down-bold (2).png" alt="pointer" width={18} height={18}/>
+                </div>
       </button>
 
       {isOpen && (
@@ -40,27 +42,21 @@ const UserDropdown = () => {
             href="/profile"
             className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
           >
-            <FaUserCircle className="mr-2" />
-            Profile
+            <Image src="/svg/raphael_people.svg" alt='icon' width={24} height={24}/>
+            Add new student
           </Link>
           <Link
             href="/settings"
             className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
           >
-            <FaCog className="mr-2" />
-            Settings
+            <Image src="/svg/raphael_people.svg" alt='icon' width={24} height={24}/>
+            Promote Class
           </Link>
-          <Link
-            href="/logout"
-            className="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-          >
-            <FaSignOutAlt className="mr-2" />
-            Log Out
-          </Link>
+          
         </div>
       )}
     </div>
   );
 };
 
-export default UserDropdown;
+export default ActionsButton;

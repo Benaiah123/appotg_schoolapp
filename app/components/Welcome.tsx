@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { quickActions } from '@/data/admin'
+import { parentActions, quickActions } from '@/data/admin'
 import { name } from '@/data'
 type Welcome1 ={
     type: String,
@@ -32,7 +32,26 @@ const Welcome = ({type}: Welcome1) => {
     
                   {/* Actions Row */}
                   <div className="flex flex-row gap-2 sm:gap-4 p-2 overflow-x-auto">
-                    {quickActions.map((action) => (
+                    {type !== "parent" && quickActions.map((action) => (
+                      <div
+                        key={action.name}
+                        className="flex flex-col gap-1 sm:gap-2 items-center justify-center rounded-lg 
+                         w-16 sm:w-20 md:w-24 h-20 sm:h-24  
+                         bg-transparent hover:bg-gray-100 flex-shrink-0"
+                      >
+                        <Image
+                          src={action.img}
+                          alt="image"
+                          width={32}
+                          height={32}
+                          className="sm:w-[40px] sm:h-[40px] md:w-[48px] md:h-[48px]"
+                        />
+                        <span className="text-[10px] sm:text-xs md:text-sm text-center">
+                          {action.name}
+                        </span>
+                      </div>
+                    ))}
+                    {type === "parent" && parentActions.map((action) => (
                       <div
                         key={action.name}
                         className="flex flex-col gap-1 sm:gap-2 items-center justify-center rounded-lg 

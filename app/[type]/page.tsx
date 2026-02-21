@@ -1,10 +1,14 @@
 import React from "react";
 import Image from "next/image";
-import UserDropdown from "../components/Dropdown";
-import { month, quickActions, statistics } from "@/data/admin";
+
+import { month, statistics } from "@/data/admin";
 import { name } from "@/data";
 import Welcome from "../components/Welcome";
 import Header from "../components/Header";
+import CalendarSection from "../components/CalendarSection";
+import { studentDetails } from "@/data/student";
+import { tutorDetails } from "@/data/tutor";
+import EventList from "../components/Event";
 
 interface PageProps {
   params: Promise<{ type: string }>; // 👈 params is async
@@ -12,15 +16,31 @@ interface PageProps {
 
 const page = async ({ params }: PageProps) => {
   const { type } = await params;
+  type Detail = {
+    name: string;
+    logo: string;
+    number: string;
+    style: string;
+    style1: string;
+  };
+
+  let details: Detail[] = [];
+  if (type === "admin") {
+    details = month;
+  } else if (type === "student") {
+    details = studentDetails;
+  } else if (type === "tutor") {
+    details = tutorDetails;
+  }
+
   return (
-    <div className="space-y-6 max-w-screen">
-      <Header type={type} />
-      <div className="flex md:grid grid-cols-1 lg:grid-cols-3 gap-3">
+   
+      <div className="flex flex-col md:grid grid-cols-1 lg:grid-cols-3 gap-3">
         {/* Welcome Section */}
         <div className="lg:col-span-2 flex flex-col gap-6 w-full max-w-full">
           <Welcome type={type} />
 
-          {month.map(({ name, number, style1 }) => (
+          {details.map(({ name, number, style1 }) => (
             <div
               key={name}
               className={`flex ${style1} border-b-2 bg-white rounded-lg p-2 justify-between items-center shadow md:hidden`}
@@ -29,18 +49,20 @@ const page = async ({ params }: PageProps) => {
               <p>₦{number}</p>
             </div>
           ))}
-          <div className="bg-white md:hidden flex flex-col gap-5 p-2 rounded-lg">
-            <p className="text-[20px] font-medium">Statistics</p>
-            {statistics.map(({ name, img, number }) => (
-              <div className="flex text-[#263065] justify-between" key={name}>
-                <div className="flex gap-2">
-                  <Image src={img} alt="logo" width={24} height={24} />
-                  <p className="">{name}</p>
+          {type === "admin" && (
+            <div className="bg-white md:hidden flex flex-col gap-5 p-2 rounded-lg">
+              <p className="text-[20px] font-medium">Statistics</p>
+              {statistics.map(({ name, img, number }) => (
+                <div className="flex text-[#263065] justify-between" key={name}>
+                  <div className="flex gap-2">
+                    <Image src={img} alt="logo" width={24} height={24} />
+                    <p className="">{name}</p>
+                  </div>
+                  <p>{number}</p>
                 </div>
-                <p>{number}</p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
           {/* Notices Section */}
           <div className="bg-white p-4 sm:p-6 rounded-xl shadow w-full">
             <div className="flex justify-between items-center">
@@ -84,38 +106,49 @@ const page = async ({ params }: PageProps) => {
               <h3>Current Month Expense</h3>
               <p className="text-2xl font-bold">140</p>
             </div> */}
-            {month.map(({ name, number, logo, style }) => (
-              <div
-                className={`${style} hidden md:block px-5 py-2.5 rounded-xl shadow`}
-                key={name}
-              >
-                <div className="flex gap-2">
-                  <Image src={logo} alt="logo" width={40} height={50} />
-                  <div>
-                    <h3>{name}</h3>
-                    <p className="text-[32px] font-medium">{number}</p>
+            {type !== "parent" &&
+              details.map(({ name, number, logo, style }) => (
+                <div
+                  className={`${style} hidden md:block px-5 py-2.5 rounded-xl shadow`}
+                  key={name}
+                >
+                  <div className="flex gap-2">
+                    <Image src={logo} alt="logo" width={40} height={50} />
+                    <div>
+                      <h3>{name}</h3>
+                      <p className="text-[32px] font-medium">{number}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            {type === "parent" && <CalendarSection />}
           </div>
-          <div className="bg-white hidden md:flex flex-col gap-5 p-2 rounded-lg">
-            <p className="text-[20px] font-medium">Statistics</p>
-            {statistics.map(({ name, img, number }) => (
-              <div className="flex text-[#263065] justify-between" key={name}>
-                <div className="flex gap-2">
-                  <Image src={img} alt="logo" width={24} height={24} />
-                  <p className="">{name}</p>
+          {type === "admin" && (
+            <div className="bg-white hidden md:flex flex-col gap-5 p-2 rounded-lg">
+              <p className="text-[20px] font-medium">Statistics</p>
+              {statistics.map(({ name, img, number }) => (
+                <div className="flex text-[#263065] justify-between" key={name}>
+                  <div className="flex gap-2">
+                    <Image src={img} alt="logo" width={24} height={24} />
+                    <p className="">{name}</p>
+                  </div>
+                  <p>{number}</p>
                 </div>
-                <p>{number}</p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
+          {type === "student" || type === "tutor" ? (
+            <div className="bg-white flex flex-col gap-5 p-2 rounded-lg">
+              <EventList />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
 
         {/* Notices */}
       </div>
-    </div>
+  
   );
 };
 

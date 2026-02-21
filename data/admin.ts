@@ -1,5 +1,27 @@
 
-
+export const AdminMenuItems = [
+  { name: "Dashboard", href: "/" },
+  { name: "Profile", href: "/profile" },
+  { name: "Students", href: "/students" },
+  { name: "Parents", href: "/parents" },
+  { name: "Teachers", href: "/teachers" },
+  { name: "Lesson notes", href: "/lesson-notes" },
+  { name: "Academics", href: "/academics" },
+  { name: "Attendance", href: "/attendance" },
+  { name: "Student Fees", href: "/fees" },
+  { name: "Library", href: "/library" },
+  { name: "Transport", href: "/transport" },
+  { name: "Hostel", href: "/hostel" },
+  { name: "Examination", href: "/examination" },
+  { name: "Manage Grade", href: "/grades" },
+  { name: "Message", href: "/message" },
+  { name: "Notice", href: "/" },
+  { name: "Event", href: "/" },
+  { name: "Email and SMS", href: "/" },
+  { name: "Reports", href: "/" },
+  { name: "User Management", href: "/" },
+  { name: "Administration", href: "/" },
+];
 export const month = [
     {
       name: "Monthly Students Payment",
@@ -48,6 +70,21 @@ export const month = [
       name: "Attendances",
       img: "/icons/Students (5).png",
     },
+  ];
+  export const parentActions = [
+    {
+      name: "My Messages",
+      img: "/icons/Students (6).png",
+    },
+    {
+      name: "My Children",
+      img: "/icons/Frame 2.png",
+    },
+    {
+      name: "My Profile",
+      img: "/icons/Students (7).png",
+    },
+  
   ];
  export const statistics = [
     {
