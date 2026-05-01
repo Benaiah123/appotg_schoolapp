@@ -3,7 +3,6 @@ import InputEdit from "@/app/components/InputEdit";
 import InputShow from "@/app/components/InputShow";
 import Image from "next/image";
 import ImageUploadPreview from "@/app/components/Upload";
-import ImageUpload from "@/app/components/Upload";
 import { useState } from "react";
 
 const Page = () => {
